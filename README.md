@@ -1,1 +1,1 @@
-# wiki-nav
+# wn
