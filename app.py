@@ -6,7 +6,7 @@ import pandas as pd
 
 app = Flask(__name__)
 
-LANGUAGES = ('pt')
+LANGUAGES = ('pt', 'en')
 
 @app.route('/<language>/<title>')
 def get_sources_and_destinations(language, title):
