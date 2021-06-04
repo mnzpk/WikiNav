@@ -1,4 +1,5 @@
 flask
 pandas
 Flask-Caching
+redis
 
