@@ -33,7 +33,6 @@ def main(language, title, direction):
     return get_paginated_response(df, start, limit, title, request.base_url, sort)
 
 
-@cache.memoize(timeout=60*60*24)
 def get_paginated_response(df, start, limit, title, url, sort):
     if start > len(df):
         abort(404)
