@@ -24,12 +24,12 @@ def main(language, title, direction):
     limit = request.args.get('limit', 20, type=int)
     sort = request.args.get('sort', 'desc')
     df = get_clickstream_data(language, title)
-    df.sort_values(by='n', ascending=sort == 'asc', inplace=True)
     if direction == 'sources':
         df = df[df.curr == title][['prev', 'n']]
     else:
         df = df[df.prev == title][['curr', 'n']]
     df.columns = ['title', 'views']
+    df.sort_values(by='views', ascending=sort == 'asc', inplace=True)
     return get_paginated_response(df, start, limit, title, request.base_url, sort)
 
 
