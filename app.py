@@ -17,7 +17,6 @@ LANGUAGES = ('pt', 'en')
 
 
 @app.route('/<language>/<title>/<any("sources", "destinations"):dir>')
-@cache.memoize(timeout=60*60*24)
 def main(language, title, dir):
     if language not in LANGUAGES:
         abort(404)
