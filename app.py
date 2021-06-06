@@ -1,11 +1,13 @@
 from flask import Flask, request, abort
 from flask_caching import Cache
 from contextlib import closing
+from flask_cors import CORS
 import os
 import sqlite3
 import pandas as pd
 
 app = Flask(__name__)
+CORS(app)
 cache = Cache(
     app,
     config={'CACHE_TYPE': 'RedisCache',

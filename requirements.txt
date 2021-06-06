@@ -2,4 +2,5 @@ flask
 pandas
 Flask-Caching
 redis
+flask-cors
 
