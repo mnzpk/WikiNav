@@ -14,8 +14,14 @@ cache = Cache(
             'CACHE_REDIS_HOST': 'tools-redis',
             'CACHE_KEY_PREFIX': 'wn-api-test'}
 )
+app.static_folder = os.path.join(app.root_path, 'client')
 
 LANGUAGES = ('pt', 'en')
+
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
 
 
 @app.route('/<language>/<title>/<any("sources", "destinations"):direction>')
