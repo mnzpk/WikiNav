@@ -6,7 +6,9 @@ import os
 import sqlite3
 import pandas as pd
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_url_path='', 
+            static_folder='client')
 CORS(app)
 cache = Cache(
     app,
@@ -14,7 +16,6 @@ cache = Cache(
             'CACHE_REDIS_HOST': 'tools-redis',
             'CACHE_KEY_PREFIX': 'wn-api-test'}
 )
-app.static_folder = os.path.join(app.root_path, 'client')
 
 LANGUAGES = ('pt', 'en')
 
