@@ -1,4 +1,4 @@
-from flask import Flask, request, abort
+from flask import Flask, request, abort, make_response
 from flask_caching import Cache
 from contextlib import closing
 from flask_cors import CORS
@@ -17,7 +17,8 @@ cache = Cache(
             'CACHE_KEY_PREFIX': 'wn-api-test'}
 )
 
-LANGUAGES = ('pt', 'en')
+LANGUAGES = [f[-5:-3]
+             for f in os.listdir(os.path.join(app.root_path, 'db')) if f.endswith('.db')]
 
 
 @app.route('/')
@@ -43,18 +44,26 @@ def main(language, title, direction):
 
 
 def get_paginated_response(df, start, limit, title, url, sort):
-    if start > len(df):
+    total_count = len(df)
+    if start > total_count:
         abort(404)
     results = df.iloc[start-1:start+limit-1]
-    if start + limit > len(df):
+    if start + limit > total_count:
         next = ''
     else:
         next = f'{url}?start={start+limit}&limit={limit}&sort={sort}'
-    res = {
+    res = make_response({
+        'start': start,
+        'limit': limit,
+        'sort': sort,
+        'total_count': total_count,
         'title': title,
         'results': results.to_dict('records'),
         'next': next
-    }
+    })
+
+    # makes it possible to get just the count through a HEAD request
+    res.headers['Total-Count'] = total_count
     return res
 
 
@@ -63,7 +72,7 @@ def get_clickstream_data(language, title):
     with closing(connect_db(language)) as conn:
         query = "SELECT * FROM clickstream WHERE prev=:title OR curr=:title"
         df = pd.read_sql_query(query, conn, params={"title": title})
-    return df
+        return df
 
 
 def connect_db(language):
