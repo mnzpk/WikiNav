@@ -17,6 +17,14 @@ object-assign
 */
 
 /*!
+           * @overview es6-promise - a tiny implementation of Promises/A+.
+           * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
+           * @license   Licensed under MIT license
+           *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
+           * @version   v4.2.8+1e68dce6
+           */
+
+/*!
            * The buffer module from node.js, for the browser.
            *
            * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
@@ -51,11 +59,6 @@ object-assign
        * Licensed under the MIT License.
        */
 
-/*! Native Promise Only
-              v0.8.1 (c) Kyle Simpson
-              MIT License: http://getify.mit-license.org
-          */
-
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
@@ -76,6 +79,15 @@ object-assign
 
 /** @license React v17.0.2
  * react-dom.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.2
+ * react-is.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
