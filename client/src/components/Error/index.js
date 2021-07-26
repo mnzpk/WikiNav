@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Error = () => (
-  <p>
+  <div className="error-container">
     An error occurred while fetching data for the current title. Try another
     one.
-  </p>
+  </div>
 );
 
 export default Error;

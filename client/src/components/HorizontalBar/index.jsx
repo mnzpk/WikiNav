@@ -1,6 +1,5 @@
 import React from 'react';
 import { ResponsiveBar } from '@nivo/bar';
-import './HorizontalBar.css';
 
 const HorizontalBar = ({ data, keys }) => (
   <div className="horizontal-bar">

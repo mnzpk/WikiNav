@@ -60,7 +60,6 @@ export default ({ fixed, options, handleSelection, handleRemoval }) => {
           isMulti
           styles={styles}
           isClearable={state.value.some((v) => !v.isFixed)}
-          name="Languages"
           className="basic-multi-select"
           classNamePrefix="select"
           onChange={onChange}

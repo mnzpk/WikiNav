@@ -69,7 +69,7 @@ const LanguageComparison = ({ languages }) => {
 
   return (
     <>
-      <div>
+      <div className="language-select">
         <MultiSelect
           fixed={fixedLanguage}
           handleSelection={handleLanguageSelection}
@@ -77,25 +77,29 @@ const LanguageComparison = ({ languages }) => {
           options={otherLanguages}
         />
       </div>
-      <p>Incoming Pageviews</p>
-      <div>
-        <BarChartContainer
-          language={language}
-          direction={directions.SOURCES}
-          clickstream={sources}
-          selectedOptions={selectedOptions}
-        />
-        <p>Percentage of Incoming Pageviews</p>
+      <p className="subsection-text">Incoming Pageviews</p>
+      <div className="barchart-container">
+        <div className="barchart">
+          <BarChartContainer
+            language={language}
+            direction={directions.SOURCES}
+            clickstream={sources}
+            selectedOptions={selectedOptions}
+          />
+        </div>
+        <p className="barchart-label">Percentage of Incoming Pageviews</p>
       </div>
-      <p>Outgoing Pageviews</p>
-      <div>
-        <BarChartContainer
-          language={language}
-          direction={directions.DESTINATIONS}
-          clickstream={destinations}
-          selectedOptions={selectedOptions}
-        />
-        <p>Percentage of Outgoing Pageviews</p>
+      <p className="subsection-text">Outgoing Pageviews</p>
+      <div className="barchart-container">
+        <div className="barchart">
+          <BarChartContainer
+            language={language}
+            direction={directions.DESTINATIONS}
+            clickstream={destinations}
+            selectedOptions={selectedOptions}
+          />
+        </div>
+        <p className="barchart-label">Percentage of Outgoing Pageviews</p>
       </div>
     </>
   );

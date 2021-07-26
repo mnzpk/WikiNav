@@ -1,8 +1,7 @@
 import React from 'react';
-import './Instruction.css';
 
-const Instruction = ({ children }) => (
-  <div className="instruction">{children}</div>
+const Instruction = ({ className, children }) => (
+  <div className={`instruction ${className}`}>{children}</div>
 );
 
 export default Instruction;

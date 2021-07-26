@@ -26,45 +26,51 @@ const languages = [
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <SearchStateProvider>
-      <div>Clickstream Analysis</div>
-      <div>
-        <LanguageSearch name="language" options={languages} />
-        <TitleSearch name="title" />
+      <div className="main-container">
+        <h1 className="section title-text">Clickstream Analysis</h1>
+        <div className="controls-container">
+          <div className="section controls">
+            <LanguageSearch name="language" options={languages} />
+            <TitleSearch name="title" />
+          </div>
+        </div>
+        <div className="content section">
+          <h2 className="section-text">Visualizing Reader Navigation</h2>
+          <Sankey name="title" />
+          <Instruction className="paragraph">
+            <strong>Reading the chart: </strong>
+            <span>
+              The chart shows common pathways to and from the selected title.
+              The links between nodes represent the number of pageviews.
+              Hovering over the nodes and links gives additional information to
+              help contextualize these pageviews.
+            </span>
+          </Instruction>
+          <h2 className="section-text">Pageviews by Referrer</h2>
+          <TreeMap />
+          <Instruction className="paragraph">
+            <strong>Reading the chart: </strong>
+            <span>
+              The chart shows common pathways to and from the selected title.
+              The links between nodes represent the number of pageviews.
+              Hovering over the nodes and links gives additional information to
+              help contextualize these pageviews.
+            </span>
+          </Instruction>
+          <h2 className="section-text">Comparison Across Languages</h2>
+          <LanguageComparison languages={languages} />
+          <h2 className="section-text">Summary Tables</h2>
+          <Instruction className="paragraph">
+            <strong>Reading the tables: </strong>
+            <span>
+              These tables summarize the visualizations above. The views and
+              percentage of views columns double as heatmaps. The columns can be
+              sorted by clicking on their labels.
+            </span>
+          </Instruction>
+          <SummaryTables />
+        </div>
       </div>
-      <p>Visualizing Reader Navigation</p>
-      <Sankey name="title" />
-      <Instruction>
-        <strong>Reading the chart: </strong>
-        <span>
-          The chart shows common pathways to and from the selected title. The
-          links between nodes represent the number of pageviews. Hovering over
-          the nodes and links gives additional information to help contextualize
-          these pageviews.
-        </span>
-      </Instruction>
-      <p>Pageviews by Referrer</p>
-      <TreeMap />
-      <Instruction>
-        <strong>Reading the chart: </strong>
-        <span>
-          The chart shows common pathways to and from the selected title. The
-          links between nodes represent the number of pageviews. Hovering over
-          the nodes and links gives additional information to help contextualize
-          these pageviews.
-        </span>
-      </Instruction>
-      <p>Comparison Across Languages</p>
-      <LanguageComparison languages={languages} />
-      <p>Summary Tables</p>
-      <Instruction>
-        <strong>Reading the tables: </strong>
-        <span>
-          These tables summarize the visualizations above. The views and
-          percentage of views columns double as heatmaps. The columns can be
-          sorted by clicking on their labels.
-        </span>
-      </Instruction>
-      <SummaryTables />
     </SearchStateProvider>
   </QueryClientProvider>
 );

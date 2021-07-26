@@ -42,7 +42,7 @@ const TreeMap = () => {
   }
 
   return (
-    <div>
+    <div className="treemap-container">
       <Plot
         data={[
           {

@@ -14,7 +14,6 @@ import {
   getDestinationPercentages,
   isReferrer,
 } from '../../utils';
-import './Sankey.css';
 import { useSearchState } from '../../searchStateContext';
 import Loader from '../Loader';
 import Error from '../Error';
@@ -94,17 +93,22 @@ const Sankey = ({ name }) => {
   }
 
   return (
-    <div>
-      <div>
+    <div className="sankey">
+      <div className="sankey-controls">
         <div>
           <Toggle
+            className="toggle"
+            id="include-other"
             defaultChecked={includeOther}
             icons={false}
             onChange={() => setIncludeOther(!includeOther)}
           />
-          <span>Include views from sources other than Wiki articles</span>
+          <span id="include-other-label" className="toggle-label">
+            Include views from sources other than Wiki articles
+          </span>
         </div>
         <Select
+          className="limit-select"
           options={limitOptions}
           onChange={(o) => setLimit(o.value)}
           defaultValue={limitOptions[0]}
