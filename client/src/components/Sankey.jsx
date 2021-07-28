@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import Plot from 'react-plotly.js';
 import Select from 'react-select';
 import Toggle from 'react-toggle';
-import useSources from '../../hooks/useSources';
-import useDestinations from '../../hooks/useDestinations';
-import useMonthlyViews from '../../hooks/useMonthlyViews';
-import useMultipleMonthlyViews from '../../hooks/useMultipleMonthlyViews';
+import useSources from '../hooks/useSources';
+import useDestinations from '../hooks/useDestinations';
+import useMonthlyViews from '../hooks/useMonthlyViews';
+import useMultipleMonthlyViews from '../hooks/useMultipleMonthlyViews';
 import {
   getNonReferrerSources,
   getTitles,
@@ -13,10 +13,10 @@ import {
   getSourcePercentages,
   getDestinationPercentages,
   isReferrer,
-} from '../../utils';
-import { useSearchState } from '../../searchStateContext';
-import Loader from '../Loader';
-import Error from '../Error';
+} from '../utils';
+import { useSearchState } from '../searchStateContext';
+import Loader from './Loader';
+import Error from './Error';
 
 const limitOptions = [
   { value: 10, label: 'top 10' },

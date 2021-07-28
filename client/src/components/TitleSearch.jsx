@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AsyncSelect from 'react-select/async';
-import { useSearchState } from '../../searchStateContext';
+import { useSearchState } from '../searchStateContext';
 
 const TitleSearch = ({ name }) => {
   const [{ language, title }, onChange] = useSearchState();

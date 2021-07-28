@@ -9,9 +9,9 @@ const HorizontalBar = ({ data, keys }) => (
       indexBy="title"
       margin={{
         top: 20,
-        right: 80,
+        right: 70,
         bottom: 25,
-        left: 150,
+        left: 155,
       }}
       padding={0.5}
       groupMode="grouped"

@@ -1,16 +1,16 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-import useSources from '../../hooks/useSources';
-import { useSearchState } from '../../searchStateContext';
+import useSources from '../hooks/useSources';
+import { useSearchState } from '../searchStateContext';
 import {
   getReferrerSources,
   getSourcePercentages,
   getTitles,
   getViews,
   sumClickstream,
-} from '../../utils';
-import Error from '../Error';
-import Loader from '../Loader';
+} from '../utils';
+import Error from './Error';
+import Loader from './Loader';
 
 const TreeMap = () => {
   const [{ language, title }] = useSearchState();

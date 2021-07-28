@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-import { useSearchState } from '../../searchStateContext';
+import { useSearchState } from '../searchStateContext';
 
 const LanguageSearch = ({ options, name }) => {
   const [{ language }, onChange] = useSearchState();
