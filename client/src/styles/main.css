@@ -16,7 +16,7 @@
   --font-size-title: 36px;
   --font-size-section: 26px;
   --font-size-subsection: 20px;
-  --font-size-body: 18.5px;
+  --font-size-body: 14px;
   --letter-spacing-title: -0.02em;
   --letter-spacing-section: -0.15em;
   --spacing0: 8px;
@@ -42,6 +42,17 @@ body {
   color: var(--color-gray2);
   background-color: var(--color-background);
 }
+a {
+  text-decoration: none;
+}
+h2::before { 
+  display: block; 
+  content: " "; 
+  margin-top: -120px; 
+  height: 120px; 
+  visibility: hidden; 
+  pointer-events: none;
+}
 .main-container {
   display: flex;
   flex-direction: column;
@@ -62,6 +73,7 @@ body {
   letter-spacing: var(--letter-spacing-title);
   line-height: 1.5;
   margin-bottom: 0;
+  text-align: center;
 }
 .section-text {
   font-size: var(--font-size-section);
@@ -198,6 +210,11 @@ body {
   max-height: 500px;
   max-width: 700px;
 }
+.section-anchor {
+  cursor: pointer;
+  margin-right: 4px;
+  color: var(--color-gray2);
+}
 @media (max-width: 481px) {
   .controls {
     grid-template-columns: 1fr;
@@ -214,5 +231,8 @@ body {
   }
   .controls {
     margin-top: 0;
+  }
+  .tooltip {
+    opacity: 0.9 !important;
   }
 }
