@@ -1,6 +1,6 @@
 import argparse
-import os
 import pandas as pd
+import os
 import sqlite3
 
 
@@ -73,9 +73,9 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    dump_dir = f"/public/dumps/public/other/clickstream/{args.month}/"
+    clickstream_dir = f"/public/dumps/public/other/clickstream/{args.month}/"
     clickstream = f"clickstream-{args.language}wiki-{args.month}"
-    dump_file = os.path.join(dump_dir, f"{clickstream}.tsv.gz")
+    dump_file = os.path.join(clickstream_dir, f"{clickstream}.tsv.gz")
     sqlite_db = args.sqlite_db if args.sqlite_db else f"{clickstream}.db"
 
     convert(dump_file, sqlite_db, args.table_name)
