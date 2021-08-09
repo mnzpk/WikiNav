@@ -57,10 +57,18 @@ const SummaryTable = ({
     id: idx,
     title: denormalize(title),
     views,
-    pov: parseFloat(clickstreamPercentages[idx]),
+    pov: parseFloat(clickstreamPercentages[idx]) || '-',
   }));
 
-  return <DataTable title={tableTitle} columns={columns} data={data} />;
+  return (
+    <DataTable
+      title={tableTitle}
+      columns={columns}
+      data={data}
+      defaultSortField="views"
+      defaultSortAsc={false}
+    />
+  );
 };
 
 export default SummaryTable;

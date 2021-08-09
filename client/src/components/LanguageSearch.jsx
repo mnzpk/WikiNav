@@ -1,16 +1,20 @@
 import React from 'react';
 import Select from 'react-select';
 import { useSearchState } from '../searchStateContext';
+import useClickstreamMetadata from '../hooks/useClickstreamMetadata';
 
-const LanguageSearch = ({ options, name }) => {
+const LanguageSearch = ({ name }) => {
   const [{ language }, onChange] = useSearchState();
+  const { data: metadata } = useClickstreamMetadata();
+  const { languages: options } = metadata ?? {};
 
   return (
     <Select
-      value={options.find(({ value }) => value === language)}
+      placeholder={`${language}.wikipedia.org`}
+      value={options?.find(({ value }) => value === language)}
       cacheOptions
       onChange={(option) => onChange(name, option.value)}
-      defaultValue={options[0]}
+      defaultValue={options?.[0]}
       options={options}
       noOptionsMessage={() => null}
       components={{

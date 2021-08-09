@@ -17,6 +17,7 @@ import {
 import { useSearchState } from '../searchStateContext';
 import Loader from './Loader';
 import Error from './Error';
+import useClickstreamMetadata from '../hooks/useClickstreamMetadata';
 
 const limitOptions = [
   { value: 10, label: 'top 10' },
@@ -48,20 +49,29 @@ const Sankey = ({ name }) => {
     isError: isSourcesError,
     data: sources,
   } = useSources(language, title);
+
   const {
     isLoading: isDestinationsLoading,
     isError: isDestinationsError,
     data: destinations,
   } = useDestinations(language, title);
+
+  const { data: metadata } = useClickstreamMetadata();
+  const [year, month] = metadata?.month.split('-') ?? [];
+
   const {
     isLoading: isMonthlyTitleViewsLoading,
     isError: isMonthlyTitleViewsError,
     data: titleMonthlyViews,
-  } = useMonthlyViews(language, title);
+  } = useMonthlyViews(language, title, month, year);
+
   const destinationsMonthlyViews = useMultipleMonthlyViews(
     language,
-    getTitles(destinations?.slice(0, 30))
+    getTitles(destinations?.slice(0, 30)),
+    month,
+    year
   );
+
   const [limit, setLimit] = useState(10);
   const [includeOther, setIncludeOther] = useState(true);
 

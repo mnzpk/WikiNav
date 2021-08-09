@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import useMultipleClickstream from '../../hooks/useMultipleClickstream';
 import useTitlesInLanguages from '../../hooks/useTitlesInLanguages';
 import HorizontalBar from '../HorizontalBar';
@@ -39,34 +39,25 @@ const BarChartContainer = ({
   const selectedLanguageViews = selectedLanguageClickstream.map(({ data }) =>
     sumClickstream(data)
   );
-  const chartData = useMemo(
-    () =>
-      limitedClickstream.map(({ title, views }) => {
-        const dataPoint = {
-          title,
-          [language]: percentageOfViews(views, clickstreamViews),
-        };
-        selectedOptions?.forEach(({ language }, idx) => {
-          const titleInLanguage = selectedLanguageTitles[idx].data?.find(
-            (s) => s.title === title
-          )?.langlink;
-          const titleViews = selectedLanguageClickstream[idx].data?.find(
-            (s) => s.title === (titleInLanguage ?? title)
-          )?.views;
-          dataPoint[language] = percentageOfViews(
-            titleViews,
-            selectedLanguageViews[idx]
-          );
-        });
-        return dataPoint;
-      }),
-    [
-      limitedClickstream,
-      selectedOptions,
-      selectedLanguageTitles,
-      selectedLanguageClickstream,
-    ]
-  );
+  const chartData = limitedClickstream.map(({ title, views }) => {
+    const dataPoint = {
+      title,
+      [language]: percentageOfViews(views, clickstreamViews),
+    };
+    selectedOptions?.forEach(({ language }, idx) => {
+      const titleInLanguage = selectedLanguageTitles[idx].data?.find(
+        (s) => s.title === title
+      )?.langlink;
+      const titleViews = selectedLanguageClickstream[idx].data?.find(
+        (s) => s.title === (titleInLanguage ?? title)
+      )?.views;
+      dataPoint[language] = percentageOfViews(
+        titleViews,
+        selectedLanguageViews[idx]
+      );
+    });
+    return dataPoint;
+  });
 
   if (
     isLoading(selectedLanguageClickstream) ||

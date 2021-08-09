@@ -3,6 +3,7 @@ import useSources from '../../hooks/useSources';
 import useDestinations from '../../hooks/useDestinations';
 import useMonthlyViews from '../../hooks/useMonthlyViews';
 import useMultipleMonthlyViews from '../../hooks/useMultipleMonthlyViews';
+import useClickstreamMetadata from '../../hooks/useClickstreamMetadata';
 import SummaryTable from './SummaryTable';
 import {
   getTitles,
@@ -15,24 +16,33 @@ import Error from '../Error';
 
 const SummaryTables = () => {
   const [{ language, title }] = useSearchState();
+
   const {
     isLoading: isSourcesLoading,
     isError: isSourcesError,
     data: sources,
   } = useSources(language, title);
+
   const {
     isLoading: isDestinationsLoading,
     isError: isDestinationsError,
     data: destinations,
   } = useDestinations(language, title);
+
+  const { data: metadata } = useClickstreamMetadata();
+  const [year, month] = metadata?.month.split('-') ?? [];
+
   const {
     isLoading: isMonthlyTitleViewsLoading,
     isError: isMonthlyTitleViewsError,
     data: titleMonthlyViews,
-  } = useMonthlyViews(language, title);
+  } = useMonthlyViews(language, title, month, year);
+
   const destinationsMonthlyViews = useMultipleMonthlyViews(
     language,
-    getTitles(destinations?.slice(0, 30))
+    getTitles(destinations?.slice(0, 30)),
+    month,
+    year
   );
 
   const limit = 10;
