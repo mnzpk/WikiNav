@@ -1,9 +1,5 @@
 import React, { useEffect, createContext, useContext } from 'react';
-import {
-  useQueryParams,
-  StringParam,
-  withDefault,
-} from 'use-query-params';
+import { useQueryParams, StringParam, withDefault } from 'use-query-params';
 
 const SearchStateContext = createContext();
 
@@ -14,12 +10,12 @@ export const SearchStateProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    setSearchState(searchState, 'push');
+    setSearchState(searchState, 'replace');
   }, []);
 
   const handleSearchStateChange = (name, value) => {
     if (searchState[name] !== value) {
-      setSearchState({ [name]: value });
+      setSearchState({ [name]: value }, 'replaceIn');
     }
   };
   const value = [searchState, handleSearchStateChange];
