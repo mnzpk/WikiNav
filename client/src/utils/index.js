@@ -45,3 +45,24 @@ export const sumClickstream = (clickstream) =>
 export const normalize = (title) => title.replaceAll(' ', '_');
 
 export const denormalize = (title) => title.replaceAll('_', ' ');
+
+export const kFormatter = (num) =>
+  num > 999 ? `${parseFloat((num / 1000).toFixed(1))}k` : num;
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+export const monthFormatter = (monthString) =>
+  months[parseInt(monthString, 10) - 1];
