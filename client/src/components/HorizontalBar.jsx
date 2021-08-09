@@ -8,12 +8,12 @@ const HorizontalBar = ({ data, keys }) => (
       keys={keys}
       indexBy="title"
       margin={{
-        top: 20,
-        right: 70,
+        top: 38,
+        right: 28,
         bottom: 25,
-        left: 155,
+        left: 120,
       }}
-      padding={0.5}
+      padding={0.3}
       groupMode="grouped"
       layout="horizontal"
       valueScale={{ type: 'linear' }}
@@ -27,6 +27,7 @@ const HorizontalBar = ({ data, keys }) => (
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
+        tickValues: 6,
         tickRotation: 0,
         legendPosition: 'middle',
         legendOffset: 50,
@@ -39,17 +40,17 @@ const HorizontalBar = ({ data, keys }) => (
         legendOffset: -50,
         format: (v) =>
           // eslint-disable-next-line react/destructuring-assignment
-          (v.length > 20 ? (
+          v.length > 12 ? (
             <tspan>
               {
                 // eslint-disable-next-line react/destructuring-assignment
-                `${v.substring(0, 20)}...`
+                `${v.substring(0, 12)}...`
               }
               <title>{v}</title>
             </tspan>
           ) : (
             v
-          )),
+          ),
       }}
       enableGridX
       enableGridY={false}
@@ -61,6 +62,31 @@ const HorizontalBar = ({ data, keys }) => (
       motionStiffness={90}
       motionDamping={15}
       enableStackTooltip
+      legends={[
+        {
+          dataFrom: 'keys',
+          anchor: 'top-right',
+          direction: 'row',
+          justify: false,
+          translateX: 0,
+          translateY: -28,
+          itemsSpacing: 2,
+          itemWidth: 70,
+          itemHeight: 20,
+          itemDirection: 'left-to-right',
+          itemOpacity: 0.85,
+          symbolShape: 'circle',
+          symbolSize: 13,
+          effects: [
+            {
+              on: 'hover',
+              style: {
+                itemOpacity: 1,
+              },
+            },
+          ],
+        },
+      ]}
     />
   </div>
 );
