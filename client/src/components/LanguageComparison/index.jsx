@@ -4,7 +4,7 @@ import useSources from '../../hooks/useSources';
 import useDestinations from '../../hooks/useDestinations';
 import useTitleinLanguages from '../../hooks/useTitleInLanguages';
 import useClickstreamMetadata from '../../hooks/useClickstreamMetadata';
-import MultiSelect from '../MultiSelect';
+import MultiSelect from './MultiSelect';
 import Loader from '../Loader';
 import BarChartContainer from './BarChartContainer';
 import { directions } from '../../utils';
