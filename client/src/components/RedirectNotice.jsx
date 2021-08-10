@@ -18,20 +18,18 @@ const RedirectNotice = ({ name }) => {
   }, [language, title]);
 
   return redirectTarget ? (
-    <div className="redirect margin-top-3">
-      <em>
-        This article redirects to{' '}
-        <a
-          href={`?language=${language}&title=${normalize(redirectTarget)}`}
-          onClick={(e) => {
-            e.preventDefault();
-            onClick(name, normalize(redirectTarget));
-          }}
-        >
-          {redirectTarget}
-        </a>
-        .
-      </em>
+    <div className="redirect">
+      This article redirects to{' '}
+      <a
+        href={`?language=${language}&title=${normalize(redirectTarget)}`}
+        onClick={(e) => {
+          e.preventDefault();
+          onClick(name, normalize(redirectTarget));
+        }}
+      >
+        {redirectTarget}
+      </a>
+      .
     </div>
   ) : null;
 };
