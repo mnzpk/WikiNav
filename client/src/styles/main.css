@@ -21,6 +21,7 @@
   --font-size-body: 14px;
   --letter-spacing-title: -0.03em;
   --letter-spacing-section: -0.02em;
+  --letter-spacing-paragraph: -0.01em;
   --spacing0: 8px;
   --spacing1: 16px;
   --spacing2: 24px;
@@ -125,6 +126,7 @@ a {
   margin-top: var(--spacing1);
   margin-bottom: var(--spacing2);
   line-height: 1.6;
+  letter-spacing: var(--letter-spacing-paragraph);
 }
 .controls-container {
   z-index: 50;
