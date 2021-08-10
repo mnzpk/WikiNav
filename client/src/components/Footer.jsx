@@ -13,7 +13,7 @@ const Footer = () => {
           Developed by{' '}
           {attributions
             .map(([name, link]) => (
-              <a href={link}>
+              <a key={name} href={link}>
                 <strong>{name}</strong>
               </a>
             ))
