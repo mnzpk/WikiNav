@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { FiLink } from 'react-icons/fi';
 import { SearchStateProvider } from './searchStateContext';
 import Header from './components/Header';
+import RedirectNotice from './components/RedirectNotice';
 import Instruction from './components/Instruction';
 import LanguageComparison from './components/LanguageComparison';
 import LanguageSearch from './components/LanguageSearch';
@@ -47,6 +48,7 @@ const App = () => (
           </section>
         </div>
         <section className="content">
+          <RedirectNotice name="title" />
           <Heading text="Overview" />
           <Overview />
           <Heading text="Reader Navigation" />

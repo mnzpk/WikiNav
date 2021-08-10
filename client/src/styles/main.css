@@ -215,6 +215,12 @@ a {
   justify-content: space-between;
   margin-bottom: var(--spacing0);
 }
+.redirect {
+  color: var(--color-gray1);
+  font-size: 15px;
+  line-height: 1.6;
+  letter-spacing: var(--letter-spacing-paragraph);
+}
 .rdt_TableCol {
   font-size: 14px !important;
   font-weight: 600 !important;
