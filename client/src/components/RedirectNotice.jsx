@@ -1,33 +1,48 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { BiRedo } from 'react-icons/bi';
 import { useSearchState } from '../searchStateContext';
-import { normalize } from '../utils';
+import { normalize, denormalize } from '../utils';
 
 const RedirectNotice = ({ name }) => {
-  const [{ language, title }, onClick] = useSearchState();
-  const [redirectTarget, setRedirectTarget] = useState();
+  const [{ language, title }, setSearchState] = useSearchState();
+  const [redirected, setRedirected] = useState(false);
+  const [redirectSource, setRedirectSource] = useState(null);
 
-  const fetchRedirectTarget = async (language, title) => {
+  const handleRedirect = async (language, title) => {
     const url = `https://${language}.wikipedia.org/w/api.php?action=query&titles=${title}&redirects&format=json&formatversion=2&origin=*`;
     const response = await axios.get(url);
-    setRedirectTarget(response.data.query?.redirects?.[0]?.to);
+    const redirectTarget = response.data.query?.redirects?.[0]?.to;
+    if (redirectTarget) {
+      setRedirected(true);
+      setRedirectSource(denormalize(title));
+      setSearchState(name, normalize(redirectTarget));
+    } else {
+      setRedirectSource(null);
+    }
   };
 
   useEffect(() => {
-    fetchRedirectTarget(language, title);
+    if (redirected) {
+      setRedirected(!redirected);
+    } else {
+      handleRedirect(language, title);
+    }
   }, [language, title]);
 
-  return redirectTarget ? (
+  return redirectSource ? (
     <div className="redirect">
-      This article redirects to{' '}
+      <span className="redirect-icon">
+        <BiRedo size="24px" />
+      </span>
+      The title <strong>{redirectSource}</strong> redirects here. Learn more
+      about{' '}
       <a
-        href={`?language=${language}&title=${normalize(redirectTarget)}`}
-        onClick={(e) => {
-          e.preventDefault();
-          onClick(name, normalize(redirectTarget));
-        }}
+        href="https://en.wikipedia.org/wiki/Wikipedia:Redirect"
+        target="_blank"
+        rel="noreferrer"
       >
-        {redirectTarget}
+        Wikipedia redirects
       </a>
       .
     </div>

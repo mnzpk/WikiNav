@@ -18,7 +18,8 @@
   --font-size-title: 38px;
   --font-size-section: 26px;
   --font-size-subsection: 20px;
-  --font-size-body: 14px;
+  --font-size-paragraph: 16.5px;
+  --font-size-body: 16px;
   --letter-spacing-title: -0.03em;
   --letter-spacing-section: -0.02em;
   --letter-spacing-instruction: -0.01em;
@@ -71,6 +72,7 @@ a {
   height: 22px;
   margin-right: 8px;
   vertical-align: middle;
+  margin-bottom: 4px;
 }
 .wmf-header a {
   display: inline-block;
@@ -122,7 +124,7 @@ a {
 }
 .paragraph {
   font-family: var(--font-family-serif);
-  font-size: 16px;
+  font-size: var(--font-size-paragraph);
   margin-top: var(--spacing1);
   margin-bottom: var(--spacing2);
   line-height: 1.6;
@@ -216,9 +218,20 @@ a {
   margin-bottom: var(--spacing0);
 }
 .redirect {
+  color: var(--color-gray1);
   line-height: 1.6;
-  padding-top: var(--spacing1);
-  font-style: italic;
+  font-size: 15px;
+}
+.redirect strong {
+  font-weight: 500;
+}
+.redirect-icon {
+  color: var(--color-blue2);
+  display: inline-block;
+  line-height: 26px;
+  vertical-align: middle;
+  margin-right: 3px;
+  margin-bottom: -3px;
 }
 .rdt_TableCol {
   font-size: 14px !important;
