@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.bb331c65.chunk.css",
-    "main.js": "/static/js/main.e6eb7251.chunk.js",
+    "main.css": "/static/css/main.517fadc4.chunk.css",
+    "main.js": "/static/js/main.e32e41c0.chunk.js",
     "runtime-main.js": "/static/js/runtime-main.e3346626.js",
-    "static/js/2.2078f9da.chunk.js": "/static/js/2.2078f9da.chunk.js",
+    "static/js/2.2ee937f4.chunk.js": "/static/js/2.2ee937f4.chunk.js",
     "index.html": "/index.html",
-    "static/js/2.2078f9da.chunk.js.LICENSE.txt": "/static/js/2.2078f9da.chunk.js.LICENSE.txt",
+    "static/js/2.2ee937f4.chunk.js.LICENSE.txt": "/static/js/2.2ee937f4.chunk.js.LICENSE.txt",
     "static/media/Wikimedia-Foundation-logo.edc07470.svg": "/static/media/Wikimedia-Foundation-logo.edc07470.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.e3346626.js",
-    "static/js/2.2078f9da.chunk.js",
-    "static/css/main.bb331c65.chunk.css",
-    "static/js/main.e6eb7251.chunk.js"
+    "static/js/2.2ee937f4.chunk.js",
+    "static/css/main.517fadc4.chunk.css",
+    "static/js/main.e32e41c0.chunk.js"
   ]
 }
