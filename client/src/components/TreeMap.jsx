@@ -2,6 +2,9 @@ import React from 'react';
 import Plot from 'react-plotly.js';
 import useSources from '../hooks/useSources';
 import { useSearchState } from '../searchStateContext';
+import useMonthlyViews from '../hooks/useMonthlyViews';
+import useClickstreamMetadata from '../hooks/useClickstreamMetadata';
+
 import {
   getReferrerSources,
   getSourcePercentages,
@@ -25,9 +28,10 @@ const Legend = () => {
       <LegendRow label="articles" info="main namespace articles" />
       <LegendRow label="other-internal" info="other Wikimedia projects" />
       <LegendRow label="other-search" info="search engines" />
-      <LegendRow label="other-external" info="external sites" />
+      <LegendRow label="other-external" info="other external sites" />
       <LegendRow label="other-empty" info="empty referrer" />
       <LegendRow label="other-other" info="everything else" />
+      <LegendRow label="filtered" info="referrer not in clickstream" />
     </div>
   );
 };
@@ -40,26 +44,43 @@ const TreeMap = () => {
     data: sources,
   } = useSources(language, title);
 
-  const sourceViewsSum = sumClickstream(sources);
-  const referrerSources = getReferrerSources(sources) ?? [];
-  const data = [
-    { title: 'All Pageviews', views: sourceViewsSum },
-    ...referrerSources,
-    {
-      title: 'Articles',
-      views: sourceViewsSum - sumClickstream(referrerSources),
-    },
-  ];
-  const parents = Array(data.length - 1).fill('All Pageviews');
-  parents.unshift('');
+  const { data: metadata } = useClickstreamMetadata();
+  const [year, month] = metadata?.month.split('-') ?? [];
 
-  if (isSourcesLoading) {
+  const {
+    isLoading: isActualMonthlyViewsLoading,
+    isError: isActualMonthlyViewsError,
+    data: actualMonthlyViews,
+  } = useMonthlyViews(language, title, month, year);
+
+  if (isSourcesLoading || isActualMonthlyViewsLoading) {
     return <Loader />;
   }
 
-  if (isSourcesError) {
+  if (isSourcesError || isActualMonthlyViewsError) {
     return <Error />;
   }
+
+  const sourceViewsSum = sumClickstream(sources);
+  const referrerSources =
+    getReferrerSources(sources)?.map((source) =>
+      (source.title === 'Main_Page' ? { ...source, title: 'main-page' } : source)
+    ) ?? [];
+
+  const data = [
+    { title: 'all pageviews', views: actualMonthlyViews },
+    ...referrerSources,
+    {
+      title: 'articles',
+      views: sourceViewsSum - sumClickstream(referrerSources),
+    },
+    {
+      title: 'filtered',
+      views: actualMonthlyViews - sourceViewsSum,
+    },
+  ];
+  const parents = Array(data.length - 1).fill('all pageviews');
+  parents.unshift('');
 
   return (
     <div className="treemap-container">
@@ -72,17 +93,19 @@ const TreeMap = () => {
               labels: getTitles(data),
               values: getViews(data),
               parents,
-              customdata: getSourcePercentages(data, sourceViewsSum),
+              customdata: getSourcePercentages(data, actualMonthlyViews),
               texttemplate: '<b>%{label}</b><br>%{percentParent}',
               hovertemplate:
                 '<b>%{label}</b><br>Pageviews: %{value}<br>%{customdata}%<extra></extra>',
               marker: {
                 colors: [
-                  '#FFF',
-                  '#0E4D92',
+                  'FFF',
+                  '0E4D92',
                   '0080FF',
                   '6593F5',
                   '73C2FB',
+                  '588BAE',
+                  '0E4D92',
                   '588BAE',
                 ],
               },
