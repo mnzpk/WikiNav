@@ -9,12 +9,12 @@ const Footer = () => {
   return (
     <footer className="wmf-footer">
       <section>
-        <span className="footer-attributions">
+        <span>
           Developed by{' '}
           {attributions
             .map(([name, link]) => (
               <a key={name} href={link}>
-                <strong>{name}</strong>
+                {name}
               </a>
             ))
             .reduce((prev, curr, index) => [

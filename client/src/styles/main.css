@@ -310,13 +310,16 @@ a {
   margin-bottom: 2px;
 }
 .wmf-footer {
+  border-top: 1px solid #e1e4e8;
   padding: 48px 0;
   line-height: 1.6;
+  font-size: 15px;
 }
-.footer-attributions a {
+.wmf-footer a {
+  color: var(--color-blue1);
   text-decoration: none;
 }
-.footer-attributions a:hover {
+.wmf-footer a:hover {
   text-decoration: underline;
 }
 @media (max-width: 481px) {
