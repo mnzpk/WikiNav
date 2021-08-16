@@ -8,6 +8,7 @@
   --color-gray0: #eaecf0;
   --color-gray1: #515a70;
   --color-gray2: #2d3146;
+  --color-gray3: #687386;
   --color-blue0: #f2f9fe;
   --color-blue1: #0670de;
   --color-blue2: #a6cee3;
@@ -18,7 +19,8 @@
   --font-size-title: 38px;
   --font-size-section: 26px;
   --font-size-subsection: 20px;
-  --font-size-paragraph: 16.5px;
+  --font-size-paragraph: 17px;
+  --font-size-small: 15px;
   --font-size-body: 16px;
   --letter-spacing-title: -0.03em;
   --letter-spacing-section: -0.02em;
@@ -166,6 +168,7 @@ a {
   color: var(--color-gray1);
   margin-top: var(--spacing2);
   letter-spacing: var(--letter-spacing-instruction);
+  font-size: var(--font-size-small);
 }
 .language-select {
   margin-bottom: var(--spacing1);
@@ -184,6 +187,7 @@ a {
   color: #333;
   font-family: sans-serif;
   font-size: 14px;
+  margin: 1em 0;
 }
 .loader-container {
   text-align: center;
@@ -220,7 +224,39 @@ a {
 .redirect {
   color: var(--color-gray1);
   line-height: 1.6;
-  font-size: 15px;
+  font-size: var(--font-size-small);
+}
+.footnotes {
+  counter-reset: footnote footnote-content;
+}
+.footnote-content::before,
+.footnote::after {
+  color: var(--color-gray1);
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: 13px;
+  font-style: normal;
+  font-family: var(--font-family-serif);
+  vertical-align: super;
+  line-height: 1;
+}
+.footnote::after {
+  counter-increment: footnote;
+  content: counter(footnote);
+}
+.footnote-content::before {
+  content: counter(footnote-content);
+  width: var(--spacing1);
+  display: inline-block;
+  margin-left: calc(-1 * var(--spacing1));
+}
+.footnote-content {
+  font-family: var(--font-family-serif);
+  counter-increment: footnote-content;
+  font-size: var(--font-size-small);
+  font-style: italic;
+  color: var(--color-gray3);
+  padding-left: var(--spacing1);
 }
 .redirect strong {
   font-weight: 500;

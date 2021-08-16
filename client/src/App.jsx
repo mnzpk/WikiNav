@@ -14,6 +14,7 @@ import TitleSearch from './components/TitleSearch';
 import TreeMap from './components/TreeMap';
 import Overview from './components/Overview';
 import Footer from './components/Footer';
+import TimeComparison from './components/TimeComparison';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -74,6 +75,16 @@ const App = () => (
                 naming scheme
               </a>{' '}
               that Wikipedia uses to identify different types of sources.
+            </span>
+          </Instruction>
+          <Heading text="Comparison Over Time" />
+          <TimeComparison />
+          <Instruction className="paragraph">
+            <strong>Reading the chart: </strong>
+            <span>
+              These charts compare the composition of traffic over time by
+              looking up the top sources and destinations for the current
+              article in the clickstream dump from the previous month.
             </span>
           </Instruction>
           <Heading text="Comparison Across Languages" />

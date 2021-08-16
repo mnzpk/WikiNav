@@ -81,7 +81,7 @@ const LanguageComparison = () => {
           options={otherLanguages}
         />
       </div>
-      <p className="subsection-text">Incoming Pageviews</p>
+      <h3 className="subsection-text">Incoming Pageviews</h3>
       <div className="comparison-container">
         <div className="barchart">
           <BarChartContainer
@@ -91,9 +91,9 @@ const LanguageComparison = () => {
             selectedOptions={selectedOptions}
           />
         </div>
-        <p className="barchart-label">Percentage of Incoming Pageviews</p>
+        <div className="barchart-label">Percentage of Incoming Pageviews</div>
       </div>
-      <p className="subsection-text">Outgoing Pageviews</p>
+      <h3 className="subsection-text">Outgoing Pageviews</h3>
       <div className="comparison-container">
         <div className="barchart">
           <BarChartContainer
@@ -103,7 +103,7 @@ const LanguageComparison = () => {
             selectedOptions={selectedOptions}
           />
         </div>
-        <p className="barchart-label">Percentage of Outgoing Pageviews</p>
+        <div className="barchart-label">Percentage of Outgoing Pageviews</div>
       </div>
     </>
   );

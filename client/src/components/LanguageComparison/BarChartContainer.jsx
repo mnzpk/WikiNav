@@ -1,7 +1,7 @@
 import React from 'react';
 import useMultipleClickstream from '../../hooks/useMultipleClickstream';
 import useTitlesInLanguages from '../../hooks/useTitlesInLanguages';
-import HorizontalBar from './HorizontalBar';
+import HorizontalBar from '../HorizontalBar';
 import Loader from '../Loader';
 import { getTitles, round, sumClickstream } from '../../utils';
 
