@@ -1,20 +1,26 @@
 import React from 'react';
 import { FiArrowDownLeft, FiArrowUpRight } from 'react-icons/fi';
-import { sumClickstream, kFormatter, monthFormatter } from '../utils';
+import {
+  sumClickstream,
+  denormalize,
+  kFormatter,
+  monthFormatter,
+} from '../utils';
 import useSources from '../hooks/useSources';
 import useDestinations from '../hooks/useDestinations';
+import useMonthlyViews from '../hooks/useMonthlyViews';
 import useClickstreamMetadata from '../hooks/useClickstreamMetadata';
 import { useSearchState } from '../searchStateContext';
 import Loader from './Loader';
 import Error from './Error';
 
-const OverviewCard = ({ incoming, figure, text }) => (
+const OverviewCard = ({ incoming, figure, text, footnote }) => (
   <div className="overview-card">
     <span className="overview-circle">
       {incoming ? <FiArrowDownLeft /> : <FiArrowUpRight />}
     </span>
     <div className="overview-figure">{figure}</div>
-    {text}
+    <span className={footnote ? 'footnote' : ''}>{text}</span>
   </div>
 );
 
@@ -33,16 +39,26 @@ const Overview = () => {
   const { data: metadata } = useClickstreamMetadata();
   const [year, month] = metadata?.month.split('-') ?? [];
 
+  const {
+    isLoading: isActualMonthlyViewsLoading,
+    isError: isActualMonthlyViewsError,
+    data: actualMonthlyViews,
+  } = useMonthlyViews(language, title, month, year);
+
   const incomingPageviews = kFormatter(sumClickstream(sources));
   const outgoingPageviews = kFormatter(sumClickstream(destinations));
   const uniqueSources = sources?.length;
   const uniqueDestinations = destinations?.length;
 
-  if (isSourcesLoading || isDestinationsLoading) {
+  if (
+    isSourcesLoading ||
+    isDestinationsLoading ||
+    isActualMonthlyViewsLoading
+  ) {
     return <Loader />;
   }
 
-  if (isSourcesError || isDestinationsError) {
+  if (isSourcesError || isDestinationsError || isActualMonthlyViewsError) {
     return <Error />;
   }
 
@@ -68,6 +84,7 @@ const Overview = () => {
           incoming
           figure={incomingPageviews}
           text="incoming pageviews"
+          footnote
         />
         <OverviewCard
           incoming={false}
@@ -80,6 +97,14 @@ const Overview = () => {
           figure={uniqueDestinations}
           text="unique destinations"
         />
+      </div>
+      <div className="footnote-content margin-top-3">
+        The actual number of incoming pageviews received by {denormalize(title)}{' '}
+        is {kFormatter(actualMonthlyViews)}. However, any (source, destination)
+        pair with 10 or fewer observations was removed from the clickstream in
+        order to maintain anonymity. The pageviews from these removed
+        observations are refferred to as &quot;filtered&quot; elsewhere on this
+        page.
       </div>
     </>
   );
