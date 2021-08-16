@@ -1,10 +1,10 @@
 import { useQuery } from 'react-query';
 import { fetchDestinations } from '../services/clickstream';
 
-export default function useDestinations(language, title) {
+export default function useDestinations(language, title, month = 'latest') {
   return useQuery(
-    ['destinations', language, title],
-    () => fetchDestinations(language, title, 'latest'),
-    { staleTime: Infinity }
+    ['destinations', language, title, month],
+    () => fetchDestinations(language, title, month),
+    { staleTime: Infinity, enabled: !!month }
   );
 }

@@ -1,10 +1,10 @@
 import { useQuery } from 'react-query';
 import { fetchSources } from '../services/clickstream';
 
-export default function useSources(language, title) {
+export default function useSources(language, title, month = 'latest') {
   return useQuery(
-    ['sources', language, title],
-    () => fetchSources(language, title, 'latest'),
-    { staleTime: Infinity }
+    ['sources', language, title, month],
+    () => fetchSources(language, title, month),
+    { staleTime: Infinity, enabled: !!month }
   );
 }
