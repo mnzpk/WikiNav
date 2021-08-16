@@ -64,7 +64,7 @@ const TreeMap = () => {
   const sourceViewsSum = sumClickstream(sources);
   const referrerSources =
     getReferrerSources(sources)?.map((source) =>
-      (source.title === 'Main_Page' ? { ...source, title: 'main-page' } : source)
+      source.title === 'Main_Page' ? { ...source, title: 'main-page' } : source
     ) ?? [];
 
   const data = [
@@ -105,7 +105,7 @@ const TreeMap = () => {
                   '6593F5',
                   '73C2FB',
                   '588BAE',
-                  '0E4D92',
+                  '73C2FB',
                   '588BAE',
                 ],
               },
