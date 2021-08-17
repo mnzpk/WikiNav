@@ -17,7 +17,8 @@ const percentageOfViews = (views, totalViews) =>
   round((views * 100) / totalViews);
 
 const getPreviousMonth = (month) => {
-  const latestDate = new Date(month);
+  const monthParts = month.split('-');
+  const latestDate = new Date(monthParts[0], monthParts[1]-1, 15);
   latestDate.setMonth(latestDate.getMonth() - 1);
   return `${latestDate.getFullYear()}-${getMonth(latestDate)}`;
 };
