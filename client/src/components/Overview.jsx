@@ -103,7 +103,7 @@ const Overview = () => {
         is {kFormatter(actualMonthlyViews)}. However, any (source, destination)
         pair with 10 or fewer observations was removed from the clickstream in
         order to maintain anonymity. The pageviews from these removed
-        observations are refferred to as &quot;filtered&quot; elsewhere on this
+        observations are referred to as &quot;filtered&quot; elsewhere on this
         page.
       </div>
     </>
