@@ -67,8 +67,9 @@ const TreeMap = () => {
       source.title === 'Main_Page' ? { ...source, title: 'main-page' } : source
     ) ?? [];
 
+  const totalMonthlyViews = Math.max(sourceViewsSum, actualMonthlyViews);
   const data = [
-    { title: 'all pageviews', views: actualMonthlyViews },
+    { title: 'all pageviews', views: totalMonthlyViews },
     ...referrerSources,
     {
       title: 'articles',
@@ -76,7 +77,7 @@ const TreeMap = () => {
     },
     {
       title: 'filtered',
-      views: actualMonthlyViews - sourceViewsSum,
+      views: totalMonthlyViews - sourceViewsSum,
     },
   ];
   const parents = Array(data.length - 1).fill('all pageviews');
@@ -93,7 +94,7 @@ const TreeMap = () => {
               labels: getTitles(data),
               values: getViews(data),
               parents,
-              customdata: getSourcePercentages(data, actualMonthlyViews),
+              customdata: getSourcePercentages(data, totalMonthlyViews),
               texttemplate: '<b>%{label}</b><br>%{percentParent}',
               hovertemplate:
                 '<b>%{label}</b><br>Pageviews: %{value}<br>%{customdata}%<extra></extra>',
