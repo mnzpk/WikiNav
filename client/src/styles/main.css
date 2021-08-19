@@ -346,6 +346,7 @@ a {
   margin-bottom: 2px;
 }
 .wmf-footer {
+  text-align: center;
   border-top: 1px solid #e1e4e8;
   padding: 48px 0;
   line-height: 1.6;
@@ -357,6 +358,16 @@ a {
 }
 .wmf-footer a:hover {
   text-decoration: underline;
+}
+.disclaimer {
+  color: #687386;
+  margin-top: 10px;
+  letter-spacing: var(--letter-spacing-instruction);
+  line-height: 1.2;
+}
+.footer-separator {
+  margin: 0 6px;
+  vertical-align: middle;
 }
 @media (max-width: 481px) {
   .controls {
