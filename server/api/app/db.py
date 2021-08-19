@@ -16,8 +16,5 @@ def close_db(e=None):
         db.close()
 
 
-# TODO: pool connections for threads
-
-
 def init_app(app):
     app.teardown_appcontext(close_db)
