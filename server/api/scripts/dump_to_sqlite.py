@@ -22,10 +22,10 @@ def convert(dump_file, sqlite_db, table_name):
         chunk.to_sql(table_name, conn, if_exists="append", method="multi", index=False)
 
     print("Creating index on column 'prev'...")
-    conn.execute("CREATE INDEX prev on clickstream(prev)")
+    conn.execute("CREATE INDEX IDX_CLK_PREV on clickstream(prev)")
 
     print("Creating index on column 'curr'...")
-    conn.execute("CREATE INDEX curr on clickstream(curr)")
+    conn.execute("CREATE INDEX IDX_CLK_CURR on clickstream(curr)")
 
     conn.close()
     print(f"The SQLite file {sqlite_db} has been created.")

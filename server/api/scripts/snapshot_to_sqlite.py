@@ -47,6 +47,8 @@ if __name__ == "__main__":
     os.chdir(snapshot)
 
     for dump in os.listdir(snapshot_path):
-        print(f"converting {dump}...")
+        print(f"Converting {dump}...")
         dump_path = os.path.join(snapshot_path, dump)
         convert(dump_path, dump.replace("tsv.gz", "db"), "clickstream")
+
+    print("Successfully converted the entire snapshot.")
