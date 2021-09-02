@@ -121,7 +121,7 @@ const Sankey = ({ name }) => {
           className="limit-select"
           options={limitOptions}
           onChange={(o) => setLimit(o.value)}
-          defaultValue={limitOptions[0]}
+          defaultValue={limitOptions.find(({value}) => value === limit)}
           isSearchable={false}
         />
       </div>
@@ -162,6 +162,7 @@ const Sankey = ({ name }) => {
                 )
               ),
               hovertemplate:
+                // eslint-disable-next-line max-len
                 "<b>Source</b>: %{source.label}<br><b>Target</b>: %{target.label}<br><b>%{customdata}%</b> of <b>%{target.label}'s</b> views for the month",
             },
           },
