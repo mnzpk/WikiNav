@@ -5,9 +5,12 @@ import os
 CLICKSTREAM_DIR = "/public/dumps/public/other/clickstream/"
 
 
-def get_latest_snapshot():
+def get_latest_snapshots(n=1):
     all_snapshots = get_all_subdirs_of(CLICKSTREAM_DIR)
-    return os.path.basename(max(all_snapshots, key=os.path.getmtime))
+    return [
+        os.path.basename(path)
+        for path in sorted(all_snapshots, key=os.path.getmtime, reverse=True)[:n]
+    ]
 
 
 def get_all_subdirs_of(directory="."):
@@ -28,9 +31,8 @@ if __name__ == "__main__":
     group.add_argument(
         "-l",
         "--latest",
-        action="store_true",
-        help="If set, the script will convert the latest snaphot in \
-            the clickstream directory.",
+        type=int,
+        help="Number of latest snapshots to convert",
     )
     group.add_argument(
         "-s",
@@ -40,15 +42,19 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-    snapshot = get_latest_snapshot() if args.latest else args.snapshot
-    snapshot_path = os.path.join(CLICKSTREAM_DIR, snapshot)
+    snapshots = get_latest_snapshots(n=args.latest) if args.latest else [args.snapshot]
+    cwd = os.getcwd()
 
-    os.mkdir(snapshot)
-    os.chdir(snapshot)
+    for snapshot in snapshots:
+        print(f"Converting snapshot: {snapshot}...")
+        db_path = os.path.join(cwd, snapshot)
+        os.mkdir(db_path)
+        os.chdir(db_path)
+        snapshot_path = os.path.join(CLICKSTREAM_DIR, snapshot)
 
-    for dump in os.listdir(snapshot_path):
-        print(f"Converting {dump}...")
-        dump_path = os.path.join(snapshot_path, dump)
-        convert(dump_path, dump.replace("tsv.gz", "db"), "clickstream")
+        for dump in os.listdir(snapshot_path):
+            print(f"Processing {dump}...")
+            dump_path = os.path.join(snapshot_path, dump)
+            convert(dump_path, dump.replace("tsv.gz", "db"), "clickstream")
 
     print("Successfully converted the entire snapshot.")

@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  dumps:
+    build: ./dumps
+    volumes:
+      - /extrastorage:/opt/app/db
+      - /public/dumps/public/other/clickstream:/public/dumps/public/other/clickstream
+    healthcheck:
+      test: bash -c "[[ -f /opt/app/SUCCESS ]]"
+      interval: 180s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build: ./web
+    command: gunicorn --bind 0.0.0.0:8000 wsgi:app
+    expose:
+      - 8000
+    volumes:
+      - /extrastorage:/opt/app/db
+    depends_on:
+      dumps:
+        condition: service_healthy
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - web

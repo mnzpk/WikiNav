@@ -1,7 +1,7 @@
 import os
 import glob
 
-APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+APP_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB_DIR = os.path.join(os.path.dirname(APP_ROOT), "db")
 
 # latest month directory in DB_DIR
