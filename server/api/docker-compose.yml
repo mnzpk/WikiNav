@@ -14,7 +14,7 @@ services:
 
   web:
     build: ./web
-    command: gunicorn --bind 0.0.0.0:8000 wsgi:app
+    command: gunicorn --bind 0.0.0.0:8000 wsgi:app --reload --reload-extra-file /opt/app/db
     expose:
       - 8000
     volumes:
